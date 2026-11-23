@@ -1,0 +1,16 @@
+{
+  "name": "value-head-training",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./index.ts"
+  },
+  "scripts": {
+    "test:gate": "node --test tests/gate.test.mjs",
+    "test:python": "python3 tests/test_python_plain.py",
+    "test:mission": "python3 tests/test_mission_plain.py",
+    "test": "node --test tests/gate.test.mjs && python3 tests/test_python_plain.py && python3 tests/test_mission_plain.py",
+    "tiny": "python3 train/train_stage1.py --tiny --out state/runs/tiny-dual && python3 train/train_stage2.py --run state/runs/tiny-dual --tiny"
+  }
+}

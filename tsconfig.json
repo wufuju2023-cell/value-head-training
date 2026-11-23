@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+    "noEmit": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "types": ["node"],
+    "baseUrl": ".",
+    "paths": {
+      "@opencode/plugin": ["~/repos/opencode-llm-trace/node_modules/@opencode/plugin/dist/promise/index.d.ts"],
+      "@opencode/plugin/rpc": ["~/repos/opencode-llm-trace/node_modules/@opencode/plugin/dist/rpc.d.ts"]
+    },
+    "typeRoots": ["~/repos/opencode-llm-trace/node_modules/@types"]
+  },
+  "include": ["index.ts", "lib/gate.d.mts"]
+}

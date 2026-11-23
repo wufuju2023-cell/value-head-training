@@ -1,0 +1,160 @@
+{
+  "comment": "Shared by tests/gate.test.mjs (node --test) and tests/test_python_plain.py. Keep in sync with lib/gate.mjs and train/gate.py.",
+  "cases": [
+    {
+      "name": "far_above",
+      "estimate": 900,
+      "expect": {
+        "action": "decompose",
+        "reason": "above_threshold",
+        "suggested_children": 2
+      }
+    },
+    {
+      "name": "just_above",
+      "estimate": 500,
+      "expect": {
+        "action": "decompose",
+        "reason": "above_threshold",
+        "suggested_children": 2
+      }
+    },
+    {
+      "name": "well_below",
+      "estimate": 300,
+      "expect": {
+        "action": "prove",
+        "reason": "below_threshold",
+        "suggested_children": 0
+      }
+    },
+    {
+      "name": "tail_12k",
+      "estimate": 12000,
+      "expect": {
+        "action": "decompose",
+        "reason": "above_threshold",
+        "suggested_children": 8
+      }
+    },
+    {
+      "name": "tail_10k_just_over",
+      "estimate": 10000,
+      "expect": {
+        "action": "decompose",
+        "reason": "above_threshold",
+        "suggested_children": 8
+      }
+    },
+    {
+      "name": "hold",
+      "estimate": 900,
+      "prev": "decompose",
+      "expect": {
+        "action": "decompose",
+        "reason": "hysteresis_hold"
+      }
+    },
+    {
+      "name": "hold_at_451",
+      "estimate": 451,
+      "prev": "decompose",
+      "expect": {
+        "action": "decompose",
+        "reason": "hysteresis_hold"
+      }
+    },
+    {
+      "name": "exit_at_400",
+      "estimate": 400,
+      "prev": "decompose",
+      "expect": {
+        "action": "prove",
+        "reason": "hysteresis_exit"
+      }
+    },
+    {
+      "name": "exit_below",
+      "estimate": 260,
+      "prev": "decompose",
+      "expect": {
+        "action": "prove",
+        "reason": "hysteresis_exit"
+      }
+    },
+    {
+      "name": "saturated_small",
+      "estimate": 120,
+      "tail_saturated": true,
+      "expect": {
+        "action": "decompose",
+        "reason": "tail_saturated",
+        "suggested_children": 2
+      }
+    },
+    {
+      "name": "wide_ci",
+      "estimate": 120,
+      "ci_high": 2400,
+      "expect": {
+        "action": "decompose",
+        "reason": "ci_upper_far_above"
+      }
+    },
+    {
+      "name": "narrow_ci",
+      "estimate": 120,
+      "ci_high": 480,
+      "expect": {
+        "action": "prove",
+        "reason": "below_threshold"
+      }
+    },
+    {
+      "name": "no_estimate",
+      "estimate": -1,
+      "expect": {
+        "action": "prove",
+        "reason": "no_estimate",
+        "suggested_children": 0
+      }
+    },
+    {
+      "name": "custom_threshold_below",
+      "estimate": 900,
+      "threshold": 1000,
+      "expect": {
+        "action": "prove",
+        "reason": "below_threshold"
+      }
+    },
+    {
+      "name": "custom_threshold_hold",
+      "estimate": 900,
+      "threshold": 1000,
+      "prev": "decompose",
+      "expect": {
+        "action": "decompose",
+        "reason": "hysteresis_hold"
+      }
+    },
+    {
+      "name": "bad_threshold_falls_back",
+      "estimate": 600,
+      "threshold": 0,
+      "expect": {
+        "action": "decompose",
+        "reason": "above_threshold",
+        "threshold": 500
+      }
+    },
+    {
+      "name": "nan_estimate",
+      "estimate": "nan",
+      "expect": {
+        "action": "prove",
+        "reason": "no_estimate"
+      }
+    }
+  ]
+}
