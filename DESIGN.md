@@ -10,8 +10,9 @@ Scope: given a base model W (any causal LM), learn
 
 where a **mission** is one (env, goal) pair with a Lean context, and the search
 action is an **N-step block**: one agent response that contributes at most
-`action_block_steps` proof steps. The head's only deployment job is the **gate**:
-at `d̂ > 500` steps the agent *must* decompose into child missions instead of
+`action_block_steps` proof steps. The head is used in three places: PUCT (initialising `Q` for unvisited
+children and backing values up), the CE value target, and the deployment gate at
+`d̂ > 500` steps, where the agent *must* decompose into child missions instead of
 attempting the full proof (§5).
 
     INVARIANT: d_hat is in proof steps; N is in proof steps; rounds = ceil(d_hat/N).

@@ -2,9 +2,10 @@
 
 Trains a **value head** that predicts how many proof steps are left for a
 **mission** — one `(env, goal, lean_context)` state, one agent response — for any
-base model W, then uses mission-level MCTS + CE to internalise search. The head's
-only deployment job is the **gate**: at `d̂ ≥ 500` proof steps the agent *must*
-decompose into child missions instead of attempting the full proof.
+base model W, then uses mission-level MCTS + CE to internalise search. The estimate is used in three places: it initialises `Q` for unvisited
+children and is backed up in PUCT; it is the CE value target; and it powers the
+deployment gate — at `d̂ ≥ 500` proof steps the agent *must* decompose into child
+missions instead of attempting the full proof.
 
 One unit only: `d̂` is in proof steps, `N` (`action_block_steps`) is in proof
 steps, and `rounds = ceil(d̂ / N)`.
